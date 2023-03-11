@@ -1,4 +1,5 @@
 local popup = require("plenary.popup")
+local path = require("plenary.path")
 
 local M = {}
 function M.create_window(buffers)
@@ -7,7 +8,9 @@ function M.create_window(buffers)
 	local borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
 	local buf_names = {}
 	for _, b in ipairs(buffers) do
-		table.insert(buf_names, vim.api.nvim_buf_get_name(b))
+        local full_path = vim.api.nvim_buf_get_name(b)
+        local cwd = vim.fn.getcwd()
+		table.insert(buf_names, path:new(full_path):make_relative(cwd))
 	end
 
 	local win_id = popup.create(buf_names, {
