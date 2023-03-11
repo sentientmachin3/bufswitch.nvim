@@ -10,4 +10,8 @@ function M.get_buffers()
 	return result
 end
 
+function M.on_buffer_selected()
+    print("selected")
+end
+
 return M
