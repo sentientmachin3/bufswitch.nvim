@@ -4,7 +4,8 @@ local M = {}
 
 function M.toggle_menu()
 	local buffers = utils.get_buffers()
-	ui.create_window(buffers)
+	local buf_names, buf_mappings = utils.get_buffer_names(buffers)
+	ui.create_window(buf_names, buf_mappings)
 end
 
 function M.setup()
